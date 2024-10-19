@@ -1,9 +1,19 @@
 using UnityEngine;
 
-public class Loader : MonoBehaviour
+namespace cdvproject
 {
-    public void LoadScene(string sceneName)
+    /// <summary>
+    /// Class responsible for loading scenes in Unity.
+    /// </summary>
+    public class Loader : MonoBehaviour
     {
-        SceneLoader.LoadScene(sceneName);
+        /// <summary>
+        /// Loads the specified scene.
+        /// </summary>
+        /// <param name="sceneName">The name of the scene to load.</param>
+        public void LoadScene(string sceneName)
+        {
+            SceneLoader.LoadScene(sceneName);
+        }
     }
 }
