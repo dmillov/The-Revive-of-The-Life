@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/MainAssets/Demo/DataManager/Script.meta
 guid: 78b9e9824d3ad894985eda7aef0f1fb2
+========
+guid: c7bd9305661378b4e8949ee60d6e04ab
+>>>>>>>> d433a6d24468a9fe21561fb3e62f50c524858c12:Assets/MainAssets/Demo/PlayerMovement/Prefab.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}
