@@ -123,27 +123,17 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &316594901 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1705404523781529573, guid: fc49b94df28516e48b7987bbaa4b5203, type: 3}
+--- !u!114 &316594903 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 575676657911223895, guid: fc49b94df28516e48b7987bbaa4b5203, type: 3}
   m_PrefabInstance: {fileID: 2028609872}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &316594903
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 316594901}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 40a9c00892df44c47bd09e5a01265d3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  virtualCamera: {fileID: 1635902198}
-  zoomedInOrthoSize: 8
-  zoomedOutOrthoSize: 7
-  transitionSpeed: 2
 --- !u!1 &402553968
 GameObject:
   m_ObjectHideFlags: 0
@@ -317,17 +307,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1635902198 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5399563205911432037, guid: fc49b94df28516e48b7987bbaa4b5203, type: 3}
-  m_PrefabInstance: {fileID: 2028609872}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 45e653bab7fb20e499bda25e1b646fea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1975883349
 GameObject:
   m_ObjectHideFlags: 0
@@ -483,10 +462,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1705404523781529573, guid: fc49b94df28516e48b7987bbaa4b5203, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 316594903}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fc49b94df28516e48b7987bbaa4b5203, type: 3}
 --- !u!1001 &2904056064783760636
 PrefabInstance:
@@ -499,14 +475,6 @@ PrefabInstance:
     - target: {fileID: 3345438279949844036, guid: eac2f69a1a8217b44947046919933649, type: 3}
       propertyPath: m_Name
       value: DemoPlayer
-      objectReference: {fileID: 0}
-    - target: {fileID: 4651239191923606704, guid: eac2f69a1a8217b44947046919933649, type: 3}
-      propertyPath: runSpeed
-      value: 25
-      objectReference: {fileID: 0}
-    - target: {fileID: 4651239191923606704, guid: eac2f69a1a8217b44947046919933649, type: 3}
-      propertyPath: movementSmoothing
-      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 4923727991906691631, guid: eac2f69a1a8217b44947046919933649, type: 3}
       propertyPath: m_LocalPosition.x

@@ -177,6 +177,7 @@ MonoBehaviour:
   inputHandler: {fileID: 7511606700621899033}
   playerMover: {fileID: 4651239191923606704}
   playerStateController: {fileID: 5434355286341282510}
+  cameraController: {fileID: 0}
 --- !u!114 &7511606700621899033
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -202,7 +203,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   walkSpeed: 15
-  runSpeed: 20
+  runSpeed: 25
   movementSmoothing: 0.05
 --- !u!114 &5434355286341282510
 MonoBehaviour:
