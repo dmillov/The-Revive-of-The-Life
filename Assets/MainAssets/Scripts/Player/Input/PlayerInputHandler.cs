@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace cvdproject.Player.Movement
+namespace cdvproject.Player
 {
     public class PlayerInputHandler : MonoBehaviour
     {
@@ -8,7 +8,20 @@ namespace cvdproject.Player.Movement
         {
             float horizontal = Input.GetAxisRaw("Horizontal");
             float vertical = Input.GetAxisRaw("Vertical");
-            return new Vector2(horizontal, vertical);
+            Vector2 movementInput = new Vector2(horizontal, vertical);
+
+            // Якщо затиснуто Shift, множимо рух на коефіцієнт швидкості
+            if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
+            {
+                movementInput *= 10; // Збільште коефіцієнт, якщо потрібно
+            }
+
+            return movementInput;
+        }
+
+        public bool IsHarvestingPressed()
+        {
+            return Input.GetButtonDown("Fire1"); // Змінити на вашу кнопку збору врожаю
         }
     }
 }
