@@ -2,6 +2,7 @@ using SGS29.Utilities;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using cdvproject.PromptInteraction.Text;
 
 namespace cdvproject.PromptInteraction
 {
@@ -52,11 +53,11 @@ namespace cdvproject.PromptInteraction
             switch (menuInfo.InteractionType)
             {
                 case InteractionType.ZoneTransition:
-                    formatText = GetZoneTransitionText(menuInfo);
+                    formatText = PromptFormatter.GetZoneTransitionText(menuInfo);
                     break;
 
                 case InteractionType.ItemPickup:
-                    formatText = GetItemPickupText(menuInfo);
+                    formatText = PromptFormatter.GetItemPickupText(menuInfo);
                     break;
 
                 default:
@@ -65,42 +66,6 @@ namespace cdvproject.PromptInteraction
             }
 
             return formatText;
-        }
-
-        /// <summary>
-        /// Formats the text specifically for zone transition interactions.
-        /// </summary>
-        /// <param name="menuInfo">The interaction information.</param>
-        /// <returns>Formatted text for zone transition.</returns>
-        private string GetZoneTransitionText(InteractionInfo menuInfo)
-        {
-            if (menuInfo.InteractionInput is MobileMenuInput)
-            {
-                return $"Press this to go to the “{menuInfo.NameText}” location.";
-            }
-            else if (menuInfo.InteractionInput is KeyboardInput keyboardInput)
-            {
-                return $"Press “{keyboardInput.GetInputAsString()}” to go to the “{menuInfo.NameText}” location.";
-            }
-            return "Invalid input type for zone transition.";
-        }
-
-        /// <summary>
-        /// Formats the text specifically for item pickup interactions.
-        /// </summary>
-        /// <param name="menuInfo">The interaction information.</param>
-        /// <returns>Formatted text for item pickup.</returns>
-        private string GetItemPickupText(InteractionInfo menuInfo)
-        {
-            if (menuInfo.InteractionInput is MobileMenuInput)
-            {
-                return $"Press this button to pick up the “{menuInfo.NameText}” item.";
-            }
-            else if (menuInfo.InteractionInput is KeyboardInput keyboardInput)
-            {
-                return $"Press “{keyboardInput.GetInputAsString()}” to pick up the “{menuInfo.NameText}” item.";
-            }
-            return "Invalid input type for item pickup.";
         }
 
         /// <summary>

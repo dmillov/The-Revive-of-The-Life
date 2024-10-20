@@ -271,7 +271,7 @@ GameObject:
   - component: {fileID: 1948876663}
   - component: {fileID: 1948876662}
   m_Layer: 5
-  m_Name: Panel
+  m_Name: ProgressBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -472,8 +472,32 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1571451357942658468, guid: 3c41ed62f16abf44188e84ec1f521bf7, type: 3}
       insertIndex: 0
       addedObject: {fileID: 1948876661}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2357651770865414326, guid: 3c41ed62f16abf44188e84ec1f521bf7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6934536266884450907}
   m_SourcePrefab: {fileID: 100100000, guid: 3c41ed62f16abf44188e84ec1f521bf7, type: 3}
+--- !u!1 &6934536266884450906 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2357651770865414326, guid: 3c41ed62f16abf44188e84ec1f521bf7, type: 3}
+  m_PrefabInstance: {fileID: 6934536266884450905}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6934536266884450907
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6934536266884450906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c3feb590350d304a967fcdd3cd9ccd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  progressRectTransform: {fileID: 1948876661}
+  startRightValue: 122.8
+  endRightValue: 0
+  smoothTime: 0.1
 --- !u!1001 &7755677635219675735
 PrefabInstance:
   m_ObjectHideFlags: 0

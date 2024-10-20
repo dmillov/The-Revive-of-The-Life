@@ -17,20 +17,13 @@ namespace cdvproject.Trigger
         [SerializeField] private KeyCode keyCode;                    // The key to trigger the interaction.
         [SerializeField] private bool isMobileControl;               // Indicates if mobile controls are used.
         [SerializeField] private string nameText;                    // The text displayed in the interaction prompt.
-        [SerializeField] private RectTransform progressRectTransform; // The RectTransform for the progress UI element.
-        [SerializeField] private float startRightValue = 122f;      // The starting value for the RectTransform's right offset.
-        [SerializeField] private float endRightValue = 0f;          // The ending value for the RectTransform's right offset.
-        [SerializeField] private float smoothTime = 0.1f;           // The time for smoothing the transition.
 
         private IInteractionInput _interactionInput;                // Interface for handling input.
-        private float currentRightValue;                             // The current right offset value for the RectTransform.
-        private float velocity = 0f;                                 // The velocity for smoothing transitions.
 
         private void Start()
         {
             // Initializes the interaction input and sets the starting right value.
             _interactionInput = GetInput();
-            currentRightValue = startRightValue;
         }
 
         /// <summary>
@@ -73,30 +66,6 @@ namespace cdvproject.Trigger
         }
 
         /// <summary>
-        /// Updates the right offset of the RectTransform based on the input progress.
-        /// </summary>
-        private void UpdateProgressRectTransform()
-        {
-            // Checks if progressRectTransform is set and if the interaction input is keyboard-based.
-            if (progressRectTransform != null && _interactionInput is KeyboardInput keyboardInput)
-            {
-                // Retrieves the hold progress from 0 to 1.
-                float progress = keyboardInput.GetHoldProgress();
-
-                // Calculates the target right value based on the progress.
-                float targetRightValue = Mathf.Lerp(startRightValue, endRightValue, progress);
-
-                // Smoothly updates the current right value.
-                currentRightValue = Mathf.SmoothDamp(currentRightValue, targetRightValue, ref velocity, smoothTime);
-
-                // Updates the RectTransform's right offset.
-                Vector2 offsetMax = progressRectTransform.offsetMax;
-                offsetMax.x = -currentRightValue;  // Adjusts the right boundary.
-                progressRectTransform.offsetMax = offsetMax;
-            }
-        }
-
-        /// <summary>
         /// Called when another collider enters the trigger collider attached to this object.
         /// </summary>
         /// <param name="other">The other collider that entered the trigger.</param>
@@ -125,7 +94,7 @@ namespace cdvproject.Trigger
         /// </summary>
         private void Update()
         {
-            UpdateProgressRectTransform(); // Updates the RectTransform based on input progress.
+            SM.Instance<ProgressInteraction>().UpdateProgressRectTransform(_interactionInput); // Updates the RectTransform based on input progress.
         }
     }
 }
