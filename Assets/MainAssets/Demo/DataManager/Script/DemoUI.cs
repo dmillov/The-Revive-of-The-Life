@@ -4,7 +4,6 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Sirenix.OdinInspector;
-using cdvproject.DataManagement;
 
 namespace cdvproject.Demo.DataManagement
 {
