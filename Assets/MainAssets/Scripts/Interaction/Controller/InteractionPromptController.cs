@@ -73,20 +73,22 @@ namespace cdvproject.PromptInteraction
         /// </summary>
         public void HidePrompt()
         {
+            _currentMenuInfo = null;
             promptPanel.SetActive(false); // Hide the prompt panel
             mobileButton.interactable = false; // Disable the mobile button
         }
 
         /// <summary>
-        /// Checks for user input and triggers the interaction if received.
+        /// Checks for user input and triggers the interaction if received. 
         /// </summary>
         private void Update()
         {
-            if (_currentMenuInfo != null && _currentMenuInfo.InteractionInput.IsInputReceived())
+            // Перевірка на наявність `_currentMenuInfo` перед викликом `IsInputReceived`
+            if (_currentMenuInfo != null && _currentMenuInfo.InteractionInput != null && _currentMenuInfo.InteractionInput.IsInputReceived())
             {
-                _currentMenuInfo.OnInteraction?.Invoke(); // Invoke the interaction callback
-                HidePrompt(); // Hide the prompt after the action is executed
-                _currentMenuInfo = null; // Reset current menu info
+                _currentMenuInfo.OnInteraction?.Invoke(); // Викликає callback для взаємодії
+                HidePrompt(); // Ховає prompt після виконання дії
+                _currentMenuInfo = null; // Скидає поточну інформацію про меню
             }
         }
     }
