@@ -1,4 +1,8 @@
+<<<<<<< Updated upstream
 // Copyright (c) Pixel Crushers. All rights reserved.
+=======
+ // Copyright (c) Pixel Crushers. All rights reserved.
+>>>>>>> Stashed changes
 
 using UnityEngine;
 using System.Collections;
@@ -494,7 +498,11 @@ namespace PixelCrushers.DialogueSystem
                 if (m_uiLocalizationManager == null)
                 {
                     m_uiLocalizationManager = gameObject.AddComponent<UILocalizationManager>();
+<<<<<<< Updated upstream
 
+=======
+                    
+>>>>>>> Stashed changes
                 }
                 if (m_uiLocalizationManager.textTable == null)
                 {
@@ -892,7 +900,11 @@ namespace PixelCrushers.DialogueSystem
                 else
                 {
                     LoadAsset(portraitName, typeof(Texture2D),
+<<<<<<< Updated upstream
                         (asset) =>
+=======
+                        (asset) => 
+>>>>>>> Stashed changes
                         {
                             var loadedSprite = UITools.CreateSprite(asset as Texture2D);
                             SetActorPortraitSprite(actorName, loadedSprite);
@@ -1680,7 +1692,11 @@ namespace PixelCrushers.DialogueSystem
             //Lua.RegisterFunction("ShowAlert", null, typeof(DialogueSystemController).GetMethod("LuaShowAlert"));
 
             // Unregister previous instance's versions first:
+<<<<<<< Updated upstream
             Lua.UnregisterFunction("RandomizeNextEntry");
+=======
+            Lua.UnregisterFunction("RandomizeNextEntry"); 
+>>>>>>> Stashed changes
             Lua.UnregisterFunction("UpdateTracker");
             // Then register functions:
             Lua.RegisterFunction("ShowAlert", null, SymbolExtensions.GetMethodInfo(() => LuaShowAlert(string.Empty)));

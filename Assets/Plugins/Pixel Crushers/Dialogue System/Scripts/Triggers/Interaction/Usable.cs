@@ -98,5 +98,12 @@ namespace PixelCrushers.DialogueSystem
         {
             if (events != null && events.onUse != null) events.onUse.Invoke();
         }
+<<<<<<< Updated upstream
     }
 }
+=======
+
+    }
+
+}
+>>>>>>> Stashed changes
