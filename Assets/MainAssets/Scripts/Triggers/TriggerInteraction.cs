@@ -1,4 +1,5 @@
 using cdvproject.PromptInteraction;
+using PixelCrushers.DialogueSystem;
 using SGS29.Utilities;
 using UnityEngine;
 using UnityEngine.Events;
@@ -6,32 +7,76 @@ using UnityEngine.Events;
 namespace cdvproject.Trigger
 {
     /// <summary>
-    /// This class handles interaction triggers, prompting the player for input and managing UI feedback 
-    /// through a RectTransform progress indicator.
+    /// Manages interaction triggers, prompts the player for input, and manages UI feedback 
+    /// with a RectTransform progress indicator.
     /// </summary>
+    [AddComponentMenu("")] // Use wrapper.
     public class TriggerInteraction : MonoBehaviour
     {
-        [SerializeField] private InteractionType interactionType;    // The type of interaction to be displayed.
-        [SerializeField] private UnityEvent Event_OnInteractionInput; // The event triggered on interaction input.
-        [SerializeField] private bool useInputLoading;               // Indicates if input loading is used (not currently implemented).
-        [SerializeField] private KeyCode keyCode;                    // The key to trigger the interaction.
-        [SerializeField] private bool isMobileControl;               // Indicates if mobile controls are used.
-        [SerializeField] private string nameText;                    // The text displayed in the interaction prompt.
+        #region Serialized Fields
 
-        private IInteractionInput _interactionInput;                // Interface for handling input.
+        [SerializeField] private InteractionType interactionType;      // Type of interaction for the displayed prompt.
+        [SerializeField] private Usable usable;                        // The usable object for interaction.
+        [SerializeField] private UnityEvent Event_OnInteractionInput;  // Event triggered on interaction input.
+        [SerializeField] private bool useInputLoading;                 // Indicates if input loading is used (not yet implemented).
+        [SerializeField] private KeyCode keyCode;                      // Key to trigger the interaction.
+        [SerializeField] private bool isMobileControl;                 // Indicates if mobile controls are used.
+        [SerializeField] private string nameText;                      // Text displayed in the interaction prompt.
+
+        #endregion
+
+        #region Private Fields
+
+        private IInteractionInput _interactionInput;                   // Interface for handling input.
+        private Transform actorTransform = null;                       // Transform of the interacting actor.
+
+        #endregion
+
+        #region Unity Lifecycle
 
         private void Start()
         {
-            // Initializes the interaction input and sets the starting right value.
+            // Initializes the interaction input method.
             _interactionInput = GetInput();
         }
+
+        private void Update()
+        {
+            // Updates the RectTransform based on input progress.
+            SM.Instance<ProgressInteraction>().UpdateProgressRectTransform(_interactionInput);
+        }
+
+        private void OnTriggerEnter2D(Collider2D other)
+        {
+            // Shows prompt if the player enters the trigger.
+            if (other.CompareTag(GameConst.PLAYER_TAG))
+            {
+                ShowPrompt();
+                OnSelectedUsableObject();
+                actorTransform = other.transform;
+            }
+        }
+
+        private void OnTriggerExit2D(Collider2D other)
+        {
+            // Hides prompt if the player exits the trigger.
+            if (other.CompareTag(GameConst.PLAYER_TAG))
+            {
+                HidePrompt();
+                OnDeselectedUsableObject();
+                actorTransform = null;
+            }
+        }
+
+        #endregion
+
+        #region Interaction Prompt
 
         /// <summary>
         /// Displays the interaction prompt to the player.
         /// </summary>
         public void ShowPrompt()
         {
-            // Creates interaction info and shows the prompt.
             InteractionInfo info = new InteractionInfo(interactionType, nameText, GetInput(), OnInteractionInput);
             SM.Instance<InteractionPromptController>().ShowPrompt(info);
         }
@@ -41,7 +86,6 @@ namespace cdvproject.Trigger
         /// </summary>
         public void HidePrompt()
         {
-            // Hides the interaction prompt if it exists.
             if (SM.HasSingleton<InteractionPromptController>())
             {
                 SM.Instance<InteractionPromptController>().HidePrompt();
@@ -49,7 +93,7 @@ namespace cdvproject.Trigger
         }
 
         /// <summary>
-        /// Gets the appropriate input method based on the control type.
+        /// Gets the appropriate input method based on control type.
         /// </summary>
         /// <returns>An instance of <see cref="IInteractionInput"/> for handling input.</returns>
         private IInteractionInput GetInput()
@@ -57,44 +101,47 @@ namespace cdvproject.Trigger
             return isMobileControl ? new MobileMenuInput() : new KeyboardInput(keyCode);
         }
 
+        #endregion
+
+        #region Interaction Events
+
         /// <summary>
         /// Invokes the interaction input event.
         /// </summary>
         private void OnInteractionInput()
         {
             Event_OnInteractionInput.Invoke();
+            UseCurrentSelection();
         }
 
         /// <summary>
-        /// Called when another collider enters the trigger collider attached to this object.
+        /// Uses the current selection if a usable object and actor are present.
         /// </summary>
-        /// <param name="other">The other collider that entered the trigger.</param>
-        public virtual void OnTriggerEnter2D(Collider2D other)
+        public void UseCurrentSelection()
         {
-            if (other.CompareTag(GameConst.PLAYER_TAG))
+            if (usable != null && actorTransform != null)
             {
-                ShowPrompt(); // Show prompt if the player enters the trigger.
+                usable.OnUseUsable();
+                usable.gameObject.BroadcastMessage("OnUse", actorTransform, SendMessageOptions.DontRequireReceiver);
             }
         }
 
         /// <summary>
-        /// Called when another collider exits the trigger collider attached to this object.
+        /// Called when a usable object is selected.
         /// </summary>
-        /// <param name="other">The other collider that exited the trigger.</param>
-        public virtual void OnTriggerExit2D(Collider2D other)
+        protected void OnSelectedUsableObject()
         {
-            if (other.CompareTag(GameConst.PLAYER_TAG))
-            {
-                HidePrompt(); // Hide prompt if the player exits the trigger.
-            }
+            usable?.OnSelectUsable();
         }
 
         /// <summary>
-        /// Updates the progress RectTransform each frame.
+        /// Called when a usable object is deselected.
         /// </summary>
-        private void Update()
+        protected void OnDeselectedUsableObject()
         {
-            SM.Instance<ProgressInteraction>().UpdateProgressRectTransform(_interactionInput); // Updates the RectTransform based on input progress.
+            usable?.OnDeselectUsable();
         }
+
+        #endregion
     }
 }
