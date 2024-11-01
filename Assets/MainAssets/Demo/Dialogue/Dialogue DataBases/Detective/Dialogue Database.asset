@@ -937,13 +937,8 @@ MonoBehaviour:
         y: 370
         width: 160
         height: 30
-<<<<<<< Updated upstream
     canvasScrollPosition: {x: 0, y: 0}
     canvasZoom: 1.1199999
-=======
-    canvasScrollPosition: {x: 0, y: 105.75048}
-    canvasZoom: 0.7000003
->>>>>>> Stashed changes
   syncInfo:
     syncActors: 0
     syncItems: 0

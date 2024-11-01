@@ -19,6 +19,7 @@ namespace cdvproject.Player
         private void Awake()
         {
             rb = GetComponent<Rigidbody2D>();
+            rb.gravityScale = 0;
             currentSpeed = walkSpeed; // Встановлюємо початкову швидкість
         }
 

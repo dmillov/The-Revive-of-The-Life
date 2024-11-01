@@ -726,6 +726,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 575422072927152593, guid: be02ee724df9cc846b8811fd2cef1ec4, type: 3}
+      propertyPath: m_Size.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 575422072927152593, guid: be02ee724df9cc846b8811fd2cef1ec4, type: 3}
+      propertyPath: m_Size.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 575422072927152593, guid: be02ee724df9cc846b8811fd2cef1ec4, type: 3}
+      propertyPath: m_Offset.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 575422072927152593, guid: be02ee724df9cc846b8811fd2cef1ec4, type: 3}
+      propertyPath: m_Offset.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2702861563581259876, guid: be02ee724df9cc846b8811fd2cef1ec4, type: 3}
       propertyPath: m_Name
       value: DemoPlayer
@@ -830,6 +846,14 @@ PrefabInstance:
     - target: {fileID: 3308488770614853372, guid: 73a163014c015cc4db2802ca4e8c0634, type: 3}
       propertyPath: m_Name
       value: NPC
+      objectReference: {fileID: 0}
+    - target: {fileID: 6053233883381161281, guid: 73a163014c015cc4db2802ca4e8c0634, type: 3}
+      propertyPath: nameText
+      value: Garen Trader
+      objectReference: {fileID: 0}
+    - target: {fileID: 6053233883381161281, guid: 73a163014c015cc4db2802ca4e8c0634, type: 3}
+      propertyPath: interactionType
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

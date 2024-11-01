@@ -18,7 +18,7 @@ namespace PixelCrushers
             {
                 AddInputDefinitions(inputDeviceManager);
             }
-            if (inputDeviceManager.joystickAxesToCheck == null || inputDeviceManager.joystickAxesToCheck.Length  == 0)
+            if (inputDeviceManager.joystickAxesToCheck == null || inputDeviceManager.joystickAxesToCheck.Length == 0)
             {
                 if (GUILayout.Button(new GUIContent("Check Default Joystick Axes", "Check joystick axis movement to detect switch to joystick mode.")))
                 {
@@ -191,6 +191,7 @@ namespace PixelCrushers
         {
             //--- Was: SerializedObject serializedObject = new SerializedObject(AssetDatabase.LoadAllAssetsAtPath("ProjectSettings/InputManager.asset")[0]);
             var assets = AssetDatabase.LoadAllAssetsAtPath("ProjectSettings/InputManager.asset");
+            Debug.Log(axisName);
             if (assets == null || assets.Length == 0) return true; // Gracefully skip if can't load InputManager.
             SerializedObject serializedObject = new SerializedObject(assets[0]);
             SerializedProperty axesProperty = serializedObject.FindProperty("m_Axes");

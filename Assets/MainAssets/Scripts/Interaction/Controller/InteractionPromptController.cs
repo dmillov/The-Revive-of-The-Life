@@ -59,6 +59,9 @@ namespace cdvproject.PromptInteraction
                 case InteractionType.ItemPickup:
                     formatText = PromptFormatter.GetItemPickupText(menuInfo);
                     break;
+                case InteractionType.NPCInteraction:
+                    formatText = PromptFormatter.GetNpcInteractionText(menuInfo);
+                    break;
 
                 default:
                     formatText = $"Press to interact with “{menuInfo.NameText}”";

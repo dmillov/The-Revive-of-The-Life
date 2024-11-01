@@ -1,10 +1,9 @@
-using cdvproject.PromptInteraction;
 using PixelCrushers.DialogueSystem;
 using SGS29.Utilities;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace cdvproject.Trigger
+namespace cdvproject.PromptInteraction
 {
     /// <summary>
     /// Manages interaction triggers, prompts the player for input, and manages UI feedback 
@@ -22,6 +21,7 @@ namespace cdvproject.Trigger
         [SerializeField] private KeyCode keyCode;                      // Key to trigger the interaction.
         [SerializeField] private bool isMobileControl;                 // Indicates if mobile controls are used.
         [SerializeField] private string nameText;                      // Text displayed in the interaction prompt.
+        [SerializeField] private bool respondOnlyTrigger = true;      // Indicates if only trigger interactions are responded to.
 
         #endregion
 
@@ -48,12 +48,10 @@ namespace cdvproject.Trigger
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            // Shows prompt if the player enters the trigger.
+            // Executes logic if the player enters the trigger area.
             if (other.CompareTag(GameConst.PLAYER_TAG))
             {
-                ShowPrompt();
-                OnSelectedUsableObject();
-                actorTransform = other.transform;
+                HandleInteraction(other);
             }
         }
 
@@ -62,9 +60,7 @@ namespace cdvproject.Trigger
             // Hides prompt if the player exits the trigger.
             if (other.CompareTag(GameConst.PLAYER_TAG))
             {
-                HidePrompt();
-                OnDeselectedUsableObject();
-                actorTransform = null;
+                HandleDeselection(other);
             }
         }
 
@@ -140,6 +136,50 @@ namespace cdvproject.Trigger
         protected void OnDeselectedUsableObject()
         {
             usable?.OnDeselectUsable();
+        }
+
+        #endregion
+
+        #region Helper Methods
+
+        /// <summary>
+        /// Handles interaction logic when the player enters the trigger.
+        /// </summary>
+        /// <param name="other">The collider of the object entering the trigger.</param>
+        private void HandleInteraction(Collider2D other)
+        {
+            // Check if interaction is allowed based on conditions.
+            if (CanInteract(other))
+            {
+                ShowPrompt();
+                OnSelectedUsableObject();
+                actorTransform = other.transform;
+            }
+        }
+
+        /// <summary>
+        /// Handles deselection logic when the player exits the trigger.
+        /// </summary>
+        /// <param name="other">The collider of the object exiting the trigger.</param>
+        private void HandleDeselection(Collider2D other)
+        {
+            // Check if deselection is allowed based on conditions.
+            if (CanInteract(other))
+            {
+                HidePrompt();
+                OnDeselectedUsableObject();
+                actorTransform = null;
+            }
+        }
+
+        /// <summary>
+        /// Determines if interaction is allowed based on the trigger conditions.
+        /// </summary>
+        /// <param name="other">The collider of the object to check.</param>
+        /// <returns>True if interaction is allowed; otherwise, false.</returns>
+        private bool CanInteract(Collider2D other)
+        {
+            return !respondOnlyTrigger || (respondOnlyTrigger && other.isTrigger);
         }
 
         #endregion

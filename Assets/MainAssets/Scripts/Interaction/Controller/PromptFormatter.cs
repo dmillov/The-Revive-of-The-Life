@@ -73,5 +73,38 @@ namespace cdvproject.PromptInteraction.Text
             }
             return "Invalid input type for zone transition.";
         }
+
+        /// <summary>
+        /// Generates a formatted text prompt for NPC interaction.
+        /// This method adapts the prompt based on the input type, providing 
+        /// instructions for either mobile or keyboard input.
+        /// </summary>
+        /// <param name="menuInfo">An <see cref="InteractionInfo"/> object containing 
+        /// details about the interaction, such as the input type and the NPC's name.</param>
+        /// <returns>
+        /// A string instructing the player how to interact with the NPC, based on 
+        /// their input method (mobile or keyboard). Returns an error message if 
+        /// the input type is invalid.
+        /// </returns>
+        /// <remarks>
+        /// This method expects <see cref="InteractionInfo.InteractionInput"/> to either 
+        /// be a <see cref="MobileMenuInput"/> or <see cref="KeyboardInput"/>.
+        /// If the input is invalid or unrecognized, the method returns a generic 
+        /// error message.
+        /// </remarks>
+        public static string GetNpcInteractionText(InteractionInfo menuInfo)
+        {
+            if (menuInfo.InteractionInput is MobileMenuInput)
+            {
+                // For mobile inputs, display a generic instruction for NPC interaction.
+                return $"Press this button to talk to “{menuInfo.NameText}”.";
+            }
+            else if (menuInfo.InteractionInput is KeyboardInput keyboardInput)
+            {
+                // For keyboard inputs, display the specific key required to interact with the NPC.
+                return $"Press “{keyboardInput.GetInputAsString()}” to talk to “{menuInfo.NameText}”.";
+            }
+            return "Invalid input type for NPC interaction.";
+        }
     }
 }

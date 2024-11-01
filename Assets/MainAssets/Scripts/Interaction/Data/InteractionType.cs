@@ -23,5 +23,12 @@ namespace cdvproject
         /// facilitates movement to a different location in the game world.
         /// </summary>
         ZoneTransition,
+
+        /// <summary>
+        /// Represents the action of interacting with a non-player character (NPC).
+        /// This interaction type is used when the player approaches or engages
+        /// with an NPC, allowing for dialogue or other interactive responses.
+        /// </summary>
+        NPCInteraction,
     }
 }
